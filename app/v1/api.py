@@ -1,9 +1,12 @@
 import io
+
 import cv2
 import numpy as np
+from fastapi import APIRouter, File, UploadFile
 from PIL import Image
-from fastapi import APIRouter, UploadFile, File
 from starlette.responses import StreamingResponse
+
+from app.anime import animefy
 
 router = APIRouter(
     prefix="/v1/api",
@@ -27,8 +30,9 @@ def post_category():
     return {"category": "cat", "caption": "A cat"}
 
 
-@router.post("/cartoonize")
-def post_cartoonize(file: UploadFile = File(...)):
+@router.post("/animefy")
+def post_animefy(file: UploadFile = File(...)):
     image = np.array(Image.open(file.file))
+    image = animefy(image)
     _, image = cv2.imencode(".png", image)  # pylint: disable=no-member
     return StreamingResponse(io.BytesIO(image.tobytes()), media_type="image/png")
