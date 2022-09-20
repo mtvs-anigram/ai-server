@@ -17,5 +17,5 @@ pip install -r requirements.txt
 ## Run App
 
 ```bash
-uvicorn app.main:app --reload
+uvicorn app.main:app --reload --log-config log.ini
 ```
