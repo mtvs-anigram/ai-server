@@ -1,7 +1,13 @@
+# base
+numpy~=1.23.3
+
 # pytorch
 --extra-index-url https://download.pytorch.org/whl/cu116
 torch~=1.12.1
 torchvision~=0.13.1
+
+# onnx
+onnxruntime-gpu~=1.12.1
 
 # pororo
 fairseq~=0.12.2
