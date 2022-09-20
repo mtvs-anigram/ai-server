@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import onnxruntime as ort
 
-from app.anime.util import singleton
+from app.utils.wrapper import singleton
 
 
 def animefy(img: np.ndarray, style: str = "Shinkai") -> np.ndarray:
@@ -31,7 +31,7 @@ class ModelManager:
             raise RuntimeError("Unsupported device")
         # providers = ["CPUExecutionProvider"]
         # pylint: disable=unnecessary-lambda-assignment
-        path = lambda s: Path(__file__).parent / "models" / f"AnimeGANv2_{s}.onnx"
+        path = lambda s: Path(__file__).parent.parent / "models" / f"AnimeGANv2_{s}.onnx"
         self._models = {
             s: ort.InferenceSession(str(path(s)), providers=providers)
             for s in self.styles

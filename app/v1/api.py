@@ -1,12 +1,11 @@
 import io
-
 import cv2
 import numpy as np
 from fastapi import APIRouter, File, UploadFile
 from PIL import Image
 from starlette.responses import StreamingResponse
 
-from app.anime import animefy
+from app.utils.anime import animefy
 
 router = APIRouter(
     prefix="/v1/api",
