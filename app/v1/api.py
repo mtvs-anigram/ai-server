@@ -16,8 +16,7 @@ router = APIRouter(
 
 @router.post("/profile")
 def post_profile(file: UploadFile = File(...)):
-    image = np.array(Image.open(file.file))
-    image = project_images(image)
+    image = project_images(file.file)
     _, image = cv2.imencode(".png", image)
 
     return StreamingResponse(io.BytesIO(image.tobytes()), media_type="image/png")
