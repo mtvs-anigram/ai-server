@@ -141,3 +141,7 @@ cython_debug/
 .vscode
 
 Animefy
+G_blend.pth
+G_out.pth
+G_pretrained.pth
+shape_predictor_68_face_landmarks.dat
