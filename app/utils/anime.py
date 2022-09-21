@@ -1,8 +1,7 @@
-from pathlib import Path
-
 import cv2
 import numpy as np
 import onnxruntime as ort
+from pathlib import Path
 
 from app.utils.wrapper import singleton
 
@@ -31,7 +30,9 @@ class ModelManager:
             raise RuntimeError("Unsupported device")
         # providers = ["CPUExecutionProvider"]
         # pylint: disable=unnecessary-lambda-assignment
-        path = lambda s: Path(__file__).parent.parent / "models" / f"AnimeGANv2_{s}.onnx"
+        path = (
+            lambda s: Path(__file__).parent.parent / "models" / f"AnimeGANv2_{s}.onnx"
+        )
         self._models = {
             s: ort.InferenceSession(str(path(s)), providers=providers)
             for s in self.styles
