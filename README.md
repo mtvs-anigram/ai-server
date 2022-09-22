@@ -19,3 +19,7 @@ pip install -r requirements.txt
 ```bash
 uvicorn app.main:app --reload --log-config log.ini --host 0.0.0.0
 ```
+
+```bash
+python -m app
+```
