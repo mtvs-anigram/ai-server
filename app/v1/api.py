@@ -7,7 +7,7 @@ from fastapi import APIRouter, File, UploadFile, Form
 from starlette.responses import StreamingResponse
 
 from app.utils.anime import animefy
-from app.utils.profile import project_images
+from app.utils.profile import animefy_profile
 
 router = APIRouter(
     prefix="/v1/api",
@@ -16,7 +16,7 @@ router = APIRouter(
 
 @router.post("/profile")
 def post_profile(file: UploadFile = File(...)):
-    image = project_images(file.file)
+    image = animefy_profile(file.file)
     _, image = cv2.imencode(".png", image)
 
     return StreamingResponse(io.BytesIO(image.tobytes()), media_type="image/png")
