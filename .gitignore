@@ -145,4 +145,7 @@ G_blend.pth
 G_out.pth
 G_pretrained.pth
 shape_predictor_68_face_landmarks.dat
+decoder-5.ckpt
+encoder-5.ckpt
+vocab.pkl
 app/images
