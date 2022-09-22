@@ -1,3 +1,4 @@
+import cv2
 import torch
 import numpy as np
 from PIL import Image
@@ -76,4 +77,4 @@ def animefy_profile(file):
     out = G(latent)
     out = utils.tensor_to_PIL(out, pixel_min=-1, pixel_max=1)[0]
 
-    return np.array(out)
+    return cv2.cvtColor(np.array(out), cv2.COLOR_RGB2BGR)
