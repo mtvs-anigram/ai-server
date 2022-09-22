@@ -8,6 +8,7 @@ from starlette.responses import StreamingResponse
 
 from app.utils.anime import animefy
 from app.utils.profile import animefy_profile
+from app.utils.extract_category import create_feed
 
 router = APIRouter(
     prefix="/v1/api",
@@ -24,13 +25,10 @@ def post_profile(file: UploadFile = File(...)):
 
 @router.post("/animefy")
 def post_animefy(file: UploadFile = File(...), text: str = Form(...)):
-    image = np.array(Image.open(file.file))
-    # print(text)
-    # category, caption = jwh_model(image, text)
-    category = ["category"]
-    caption = "caption"
+    image = Image.open(file.file)
+    category, caption = create_feed(image, text)
     category = json.dumps(category)
-    image = animefy(image)
+    image = animefy(np.array(image))
     _, image = cv2.imencode(".png", image)
 
     return StreamingResponse(
