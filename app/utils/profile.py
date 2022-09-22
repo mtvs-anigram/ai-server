@@ -10,7 +10,6 @@ from app.ffhq_dataset.landmarks_detector import LandmarksDetector
 
 pixel_min = -1.0
 pixel_max = 1.0
-output_size = 512
 num_steps = 200
 seed = 1234
 landmarks_model_path = "app/models/shape_predictor_68_face_landmarks.dat"
@@ -63,7 +62,7 @@ def animefy_profile(file):
         proj.start(
             target=target,
             num_steps=num_steps,
-            verbose=True,
+            verbose=False,
         )
 
         for _ in range(num_steps):
