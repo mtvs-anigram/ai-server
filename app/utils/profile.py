@@ -11,7 +11,7 @@ from app.ffhq_dataset.landmarks_detector import LandmarksDetector
 
 pixel_min = -1.0
 pixel_max = 1.0
-num_steps = 200
+num_steps = 80
 seed = 1234
 landmarks_model_path = "app/models/shape_predictor_68_face_landmarks.dat"
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
