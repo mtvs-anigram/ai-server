@@ -6,6 +6,7 @@ from PIL import Image
 from fastapi import APIRouter, File, UploadFile, Form
 from starlette.responses import StreamingResponse
 
+from app.utils.category_classes import *
 from app.utils.anime import animefy
 from app.utils.profile import animefy_profile
 from app.utils.extract_category import create_feed
