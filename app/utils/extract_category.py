@@ -5,7 +5,7 @@ from googletrans import Translator
 from konlpy.tag import Okt
 from torchvision import transforms
 
-from app.utils.category_classes import *
+from app.utils.category_classes import DecoderRNN, EncoderCNN, Vocabulary
 from app.utils.util import list_to_string, load_image
 
 okt = Okt()
@@ -22,16 +22,19 @@ encoder = EncoderCNN(embed_size).eval()
 encoder = encoder.to(device)
 encoder.load_state_dict(torch.load(encoder_path))
 
+import __main__
+
+__main__.Vocabulary = Vocabulary
+with open(vocab_path, "rb") as f:
+    vocab = pickle.load(f)
+    f.close()
+
+decoder = DecoderRNN(embed_size, hidden_size, len(vocab), num_layers)
+decoder = decoder.to(device)
+decoder.load_state_dict(torch.load(decoder_path))
+
 
 def create_feed(img, main_txt):
-    with open(vocab_path, "rb") as f:
-        vocab = pickle.load(f)
-        f.close()
-
-    decoder = DecoderRNN(embed_size, hidden_size, len(vocab), num_layers)
-    decoder = decoder.to(device)
-    decoder.load_state_dict(torch.load(decoder_path))
-
     transform = transforms.Compose(
         [
             transforms.ToTensor(),
